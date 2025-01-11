@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load cart %}
+{% block content %}
+<div class="container">
+
+    <table class="table table-bordered mt-4 table-hover " >
+        <thead>
+            <tr>
+                <td>Sr.No</td>
+                <td>Product</td>
+                <td>Quantity</td>
+                <td>Price</td>
+                <td>Total</td>
+                <td>Status</td>
+            </tr>
+        </thead>
+        <tbody>
+        {% for order in orders %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td><img src="{{order.product.product_img.url}}" style="width:5rem"  class="card-img-top border p-1" alt="...">{{order.product.product}}</td>
+                <td>{{order.quantity}}</td>
+                <td>{{order.price}}</td>
+                <td> RS {{ order.quantity|multiply:order.price}}</td>
+                {% if order.status %}
+                <td><span class="badge badge-success">Success</span></td>
+                {% else %}
+                <td><span class="badge badge-warning">Pending</span></td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+
+        </tfoot>
+    </table>
+
+{% endblock %}
